@@ -4,19 +4,19 @@ window.addEventListener('load', init, false);
 
 function init() {
 	
-	var bees;
-	
-
-	//Initialize variables
-
-
-	bees = [];
+	var dataManager = new DataManager();
+	var navManager  = new NavManager(dataManager);
 	
 
 	//Program Logic
 
 
 	requestUsersData();
+	requestUsersPosts();
+	requestUsersComments();
+	requestUsersAlbum();
+	requestUsersPhotos();
+	requestUsersTodos();
 	
 
 	function requestUsersData() {
@@ -36,22 +36,140 @@ function init() {
 				
 				for (var key in data) {
 
+					var beeData = data[key];
+
+					var addressData = data[key].address;
+
+					var geo = new Geo(addressData.geo.lat, addressData.geo.lng);
 					
-					var bee = new Bee(data[key].id, data[key].name, data[key].username, data[key].email);
-					var beeTwo = new Bee(data[0].id, data[0].name, data[0].username, data[0].email);
+					var address = new Address(addressData.city, geo, addressData.street, addressData.suite, addressData.zipcode);
+
+					var bee = new Bee(beeData.id, beeData.name, beeData.username, beeData.email, beeData.phone, 
+
+					new Address(addressData.city, new Geo (addressData.geo.lat, addressData.geo.lng),
+
+					addressData.street, addressData.suite, addressData.zipcode ));
+
+					dataManager.bees.push(bee);
+
 					
 
-					bees.push(bee);
+				}
+
+				navManager.showBees();
+			}
+			else {
+				console.log('Server Error');
+			}
+		}
+	}
+
+	function requestUsersPosts() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+		request.onreadystatechange = requestUsersPostsCompleted;
+		request.send();
+	}
+
+	function requestUsersPostsCompleted(e) {
+		var request = e.target;
+		
+		if (request.readyState == XMLHttpRequest.DONE) {
+			if (request.status == 200) {
+
+				var data = JSON.parse(request.responseText);
+				
+				for (var key in data) {
+
+				var beePosts = data[key];
+
+
+				var posts = new Posts(beePosts.body, beePosts.id, beePosts.title, beePosts.userId);
+					
+				dataManager.bees.push(posts);
+
 					
 
-					console.log(bee);
+				}
+				//--navManager.showPosts();
+				
+			}
+			else {
+				console.log('Server Error');
+			}
+		}
+	}
+
+	function requestUsersComments() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://jsonplaceholder.typicode.com/comments', true);
+		request.onreadystatechange = requestUsersCommentsCompleted;
+		request.send();
+	}
+
+	function requestUsersCommentsCompleted(e) {
+		var request = e.target;
+		
+		if (request.readyState == XMLHttpRequest.DONE) {
+			if (request.status == 200) {
+
+				var data = JSON.parse(request.responseText);
+				
+				for (var key in data) {
+
+				var beeComments = data[key];
+
+
+				var comment = new Comments(beeComments.body, beeComments.email, beeComments.id, beeComments.name, beeComments.postId);
 					
-    				document.getElementById("userUno").innerHTML = beeTwo.name + ' <br>' +  beeTwo.username + ' <br>' +  beeTwo.email;
-    				document.getElementById("userDos").innerHTML = data[1].name + ' <br>' +  data[1].username + ' <br>' +  data[1].email;
-    				document.getElementById("userTres").innerHTML = data[2].name + ' <br>' +  data[2].username + ' <br>' +  data[2].email;
+				dataManager.bees.push(beeComments);
 
 
+				}
 
+				//--navManager.showComments();
+			}
+			else {
+				console.log('Server Error');
+			}
+		}
+	}
+
+	function requestUsersAlbum() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://jsonplaceholder.typicode.com/albums', true);
+		request.onreadystatechange = requestUsersAlbumCompleted;
+		request.send();
+	}
+
+	function requestUsersPhotos() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://jsonplaceholder.typicode.com/photos', true);
+		request.onreadystatechange = requestUsersAlbumCompleted;
+		request.send();
+	}
+
+	function requestUsersTodos() {
+		var request = new XMLHttpRequest();
+		request.open('GET', 'https://jsonplaceholder.typicode.com/todos', true);
+		request.onreadystatechange = requestUsersTodosCompleted;
+		request.send();
+	}
+
+
+	function requestUsersTodosCompleted(e) {
+		var request = e.target;
+		
+		if (request.readyState == XMLHttpRequest.DONE) {
+			if (request.status == 200) {
+
+				var data = JSON.parse(request.responseText);
+				
+				for (var key in data) {
+
+				
+
+					
 
 				}
 
@@ -62,4 +180,59 @@ function init() {
 			}
 		}
 	}
+
+
+	function requestUsersPhotosCompleted(e) {
+		var request = e.target;
+		
+		if (request.readyState == XMLHttpRequest.DONE) {
+			if (request.status == 200) {
+
+				var data = JSON.parse(request.responseText);
+				
+				for (var key in data) {
+
+				
+
+					
+
+				}
+
+				
+			}
+			else {
+				console.log('Server Error');
+			}
+		}
+	}
+
+	function requestUsersAlbumCompleted(e) {
+		var request = e.target;
+		
+		if (request.readyState == XMLHttpRequest.DONE) {
+			if (request.status == 200) {
+
+				var data = JSON.parse(request.responseText);
+				
+				for (var key in data) {
+
+				
+
+					
+
+				}
+
+				
+			}
+			else {
+				console.log('Server Error');
+			}
+		}
+	}
+
+
+
+	
+
+	
 }

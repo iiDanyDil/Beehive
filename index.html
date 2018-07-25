@@ -5,24 +5,56 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Beehive</title>
 	<script src="app.js"></script>
 	<script src="models/bee.js"></script>
-	<link rel="stylesheet" href="style.css">
+	<script src="models/address.js"></script>
+	<script src="models/geo.js"></script>
+	<script src="models/album.js"></script>
+	<script src="models/photo.js"></script>
+	<script src="models/todo.js"></script>
+	<script src="models/posts.js"></script>
+	<script src="models/comment.js"></script>
+	<script src="components/component.js"></script>
+	<script src="components/commentsComponents.js"></script>
+	<script src="components/beeComponents.js"></script>
+	<script src="components/postsComponents.js"></script>
+	<script src="managers/dataManager.js"></script>
+	<script src="managers/navManager.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bessComponent.css">
 
 </head>
 <main>
 	
-<p id="userUno"></p>
-<p id="userDos"></p>
-<p id="userTres"></p>
-<p id="userCuatro"></p>
+<body>
+
+<div class="appComponent">
+
+	<div id="beesComponent" class="beeComponent"></div>
+
+	<div class="beeActivityComponent">
+
+	<div id="postComponent" class="postComponent">
+		<div id="commentsComponent" class="commentsComponent"></div>
+	</div>
+
+	<div id="albumComponent" class="albumComponent"></div>
+	<div id="todosComponent" class="todosComponent"></div>
+
+	</div>
+
+</div>
+
+
+
+
+
+
 
 
 
 </main>
-
-<body>
 </body>
 
 </html>
