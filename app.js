@@ -122,6 +122,7 @@ function init() {
 					dataManager.addCommentToPost(comment);
 				}
 
+				dataManager.currentBee = dataManager.bees[1];
 				navManager.showPosts();
 			}
 			else {

@@ -15,8 +15,8 @@ class NavManager {
 	}
 
 	showPosts() {
-		this.dataManager.bees.forEach(bee => {
-			var postComponent = new PostsComponent(bee, this.postsComponent, this.dataManager);
+		this.dataManager.currentBee.posts.forEach(post => {
+			var postComponent = new PostComponent(post, this.postsComponent, this.dataManager);
 		})
 	}
 

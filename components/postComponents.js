@@ -1,4 +1,4 @@
-class PostsComponent extends Component {
+class PostComponent extends Component {
 
 	constructor(model, parent, dataManager) {
 
@@ -6,16 +6,16 @@ class PostsComponent extends Component {
 
 		this.container.className = 'postComponent';
 
-					
 
-	//crear elementos
+
+		//crear elementos
 
 		this.body = document.createElement('p');
 		this.id = document.createElement('p');
 		this.title = document.createElement('p');
 		this.userId = document.createElement('p');
-		
-		
+
+
 
 
 		//Agegar elementos
@@ -24,8 +24,8 @@ class PostsComponent extends Component {
 		this.container.appendChild(this.id);
 		this.container.appendChild(this.title);
 		this.container.appendChild(this.userId);
-		 
-	
+
+
 
 
 		//llenar elementos
@@ -36,10 +36,10 @@ class PostsComponent extends Component {
 		this.userId.innerText = this.model.userId;
 
 
-		
+
 	}
 
-	postBtnClick(e){
+	postBtnClick(e) {
 		this.dataManager.setCurrentBee(this.model);
 	}
 
