@@ -5,8 +5,5 @@ class Comments {
 		this.id = id;
 		this.name = name;
 		this.postId = postId;
-		
 	}
-
-
 }

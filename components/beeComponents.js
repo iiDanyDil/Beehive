@@ -29,7 +29,7 @@ class BeeComponent extends Component {
 		this.container.appendChild(this.userName);
 		this.container.appendChild(this.email);
 		this.container.appendChild(this.phone);
-		this.container.appendChild(this.city); 
+		this.container.appendChild(this.city);
 		this.container.appendChild(this.posts);
 		this.container.appendChild(this.photos);
 		this.container.appendChild(this.todos);
@@ -45,7 +45,7 @@ class BeeComponent extends Component {
 		this.email.innerText = this.model.email;
 		this.phone.innerText = this.model.phone;
 		this.city.innerText = this.model.city;
-		//this.posts.innerText = 'Posts:' + this.model.posts.length;
+		this.posts.innerText = 'Posts:' + this.model.posts.length;
 		this.photos.innerText = 'Photos: 0';
 		this.todos.innerText = 'Todos:' + this.model.todos.length;
 		this.postsBtn.innerText = 'POSTS';
@@ -55,10 +55,10 @@ class BeeComponent extends Component {
 		this.postsBtn.onclick = this.postBtnClick.bind(this);
 
 
-		
+
 	}
 
-	postBtnClick(e){
+	postBtnClick(e) {
 		this.dataManager.setCurrentBee(this.model);
 	}
 

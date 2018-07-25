@@ -13,7 +13,7 @@
 	<script src="models/album.js"></script>
 	<script src="models/photo.js"></script>
 	<script src="models/todo.js"></script>
-	<script src="models/posts.js"></script>
+	<script src="models/post.js"></script>
 	<script src="models/comment.js"></script>
 	<script src="components/component.js"></script>
 	<script src="components/commentsComponents.js"></script>
@@ -22,29 +22,30 @@
 	<script src="managers/dataManager.js"></script>
 	<script src="managers/navManager.js"></script>
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/bessComponent.css">
-
+	<link rel="stylesheet" href="css/beesComponent.css">
+	<link rel="stylesheet" href="css/appComponent.css">
+	<link rel="stylesheet" href="css/beesActivityComponent.css">
 </head>
 <main>
-	
-<body>
 
-<div class="appComponent">
+	<body>
 
-	<div id="beesComponent" class="beeComponent"></div>
+		<div class="appComponent">
 
-	<div class="beeActivityComponent">
+			<div id="beesComponent" class="beesComponent"></div>
 
-	<div id="postComponent" class="postComponent">
-		<div id="commentsComponent" class="commentsComponent"></div>
-	</div>
+			<div class="beeActivityComponent">
 
-	<div id="albumComponent" class="albumComponent"></div>
-	<div id="todosComponent" class="todosComponent"></div>
+				<div id="postsComponent" class="postsComponent">
+					<!-- <div id="commentsComponent" class="commentsComponent"></div> -->
+				</div>
 
-	</div>
+				<div id="albumComponent" class="albumComponent"></div>
+				<div id="todosComponent" class="todosComponent"></div>
 
-</div>
+			</div>
+
+		</div>
 
 
 

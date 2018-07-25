@@ -3,10 +3,10 @@
 window.addEventListener('load', init, false);
 
 function init() {
-	
+
 	var dataManager = new DataManager();
-	var navManager  = new NavManager(dataManager);
-	
+	var navManager = new NavManager(dataManager);
+
 
 	//Program Logic
 
@@ -17,7 +17,7 @@ function init() {
 	requestUsersAlbum();
 	requestUsersPhotos();
 	requestUsersTodos();
-	
+
 
 	function requestUsersData() {
 		var request = new XMLHttpRequest();
@@ -28,12 +28,12 @@ function init() {
 
 	function requestUsersDataCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
 					var beeData = data[key];
@@ -41,18 +41,18 @@ function init() {
 					var addressData = data[key].address;
 
 					var geo = new Geo(addressData.geo.lat, addressData.geo.lng);
-					
+
 					var address = new Address(addressData.city, geo, addressData.street, addressData.suite, addressData.zipcode);
 
-					var bee = new Bee(beeData.id, beeData.name, beeData.username, beeData.email, beeData.phone, 
+					var bee = new Bee(beeData.id, beeData.name, beeData.username, beeData.email, beeData.phone,
 
-					new Address(addressData.city, new Geo (addressData.geo.lat, addressData.geo.lng),
+						new Address(addressData.city, new Geo(addressData.geo.lat, addressData.geo.lng),
 
-					addressData.street, addressData.suite, addressData.zipcode ));
+							addressData.street, addressData.suite, addressData.zipcode));
 
 					dataManager.bees.push(bee);
 
-					
+
 
 				}
 
@@ -73,26 +73,23 @@ function init() {
 
 	function requestUsersPostsCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
-				var beePosts = data[key];
+					var beePosts = data[key];
 
+					var post = new Post(beePosts.body, beePosts.id, beePosts.title, beePosts.userId);
 
-				var posts = new Posts(beePosts.body, beePosts.id, beePosts.title, beePosts.userId);
-					
-				dataManager.bees.push(posts);
-
-					
-
+					dataManager.addPostToBee(post);
 				}
-				//--navManager.showPosts();
-				
+
+				//Request comments.
+				requestUsersComments();
 			}
 			else {
 				console.log('Server Error');
@@ -109,25 +106,23 @@ function init() {
 
 	function requestUsersCommentsCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
-				var beeComments = data[key];
+					var beeComments = data[key];
 
 
-				var comment = new Comments(beeComments.body, beeComments.email, beeComments.id, beeComments.name, beeComments.postId);
-					
-				dataManager.bees.push(beeComments);
+					var comment = new Comments(beeComments.body, beeComments.email, beeComments.id, beeComments.name, beeComments.postId);
 
-
+					dataManager.addCommentToPost(comment);
 				}
 
-				//--navManager.showComments();
+				navManager.showPosts();
 			}
 			else {
 				console.log('Server Error');
@@ -159,21 +154,21 @@ function init() {
 
 	function requestUsersTodosCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
-				
 
-					
+
+
 
 				}
 
-				
+
 			}
 			else {
 				console.log('Server Error');
@@ -184,21 +179,21 @@ function init() {
 
 	function requestUsersPhotosCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
-				
 
-					
+
+
 
 				}
 
-				
+
 			}
 			else {
 				console.log('Server Error');
@@ -208,21 +203,21 @@ function init() {
 
 	function requestUsersAlbumCompleted(e) {
 		var request = e.target;
-		
+
 		if (request.readyState == XMLHttpRequest.DONE) {
 			if (request.status == 200) {
 
 				var data = JSON.parse(request.responseText);
-				
+
 				for (var key in data) {
 
-				
 
-					
+
+
 
 				}
 
-				
+
 			}
 			else {
 				console.log('Server Error');
@@ -232,7 +227,7 @@ function init() {
 
 
 
-	
 
-	
+
+
 }
